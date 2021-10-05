@@ -3,7 +3,7 @@ import './App.css';
 export function App() {
   return (
     <div className="App">
-       Hello React!
+       Hello React, second commit!
     </div>
   );
 }
