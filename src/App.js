@@ -4,7 +4,7 @@ import { HomePageMessage } from "./HomePageMessage/HomePageMessage";
 export function App(props) {
   return (
     <div className="App">
-       <HomePageMessage message={props.message}/>
+       //<HomePageMessage message={props.message}/>
     </div>
   );
 }
