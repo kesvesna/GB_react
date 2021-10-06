@@ -1,9 +1,10 @@
 import './App.css';
+import { HomePageMessage } from "./HomePageMessage/HomePageMessage";
 
-export function App() {
+export function App(props) {
   return (
     <div className="App">
-       Hello React, second commit!
+       <HomePageMessage message={props.message}/>
     </div>
   );
 }
