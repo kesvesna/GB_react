@@ -1,0 +1,84 @@
+.container-fluid {
+	height: 100vh;
+	display: flex;
+	background: rgb(2,0,36);
+	background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(7,7,98,0.7458333675266982) 0%, rgba(131,39,184,1) 50%, rgba(0,212,255,1) 100%);
+}
+
+.left-side-block,
+.right-side-block {
+	height: 90vh;
+	margin-top: 5vh;
+	border-radius: 5px;
+	padding: 1vh;
+}
+
+.left-side-block {
+	margin-left: 5vh;
+}
+
+.right-side-block {
+	margin-left: 5vh;
+}
+
+.left-side-block-chat-info {
+	height: 80vh;
+	border-radius: 5px;
+	padding-top: 3vh;
+	overflow-x: hidden;
+}
+
+.left-side-block-header,
+.right-side-block-header,
+.right-side-block-message-input {
+	height: 8vh;
+	border-radius: 5px;
+}
+.right-side-block-header {
+	text-align: center;
+	padding-top: 1vh;
+}
+
+.right-side-block-chat-message {
+	height: 72vh;
+	border-radius: 5px;
+}
+
+.message-input,
+.input-group {
+	height: 100%;
+}
+
+.user-message,
+.robot-message {
+	min-height: 8vh;
+	border-radius: 5px;
+	padding: 0 10px;
+	width: 50%;
+}
+
+.user-message {
+	background-color: lightgreen;
+	margin-left: 50%;
+}
+
+.robot-message {
+	background-color: lightgray;
+}
+
+
+.right-side-block-chat-message {    
+    max-height: 72vh;
+    overflow-x: hidden;
+}
+
+.chat-name {
+	height: 8vh;
+	border-radius: 5px;
+	padding: 0 12px;
+}
+
+.chat-name:hover {
+	background-color: lightgrey;
+}
+
