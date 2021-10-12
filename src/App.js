@@ -21,17 +21,20 @@ export function App(props) {
     ]);
 
     const handleOnClickSendButton = () => {
-        setMessageList(messageList => ([...messageList, {
-            author: "User1",
-            message: message,
-            styleInfo: userMessageStyle
-        }]));
-        setMessage(message => (message = ''));
+        if(message){
+            setMessageList(messageList => ([...messageList, {
+                author: "User1",
+                message: message,
+                styleInfo: userMessageStyle
+            }]));
+            setMessage('');
+        }
     }
 
     useEffect(() => {
         let timer = null;
-        if (messageList.length > 1 && messageList[messageList.length - 1].author !== "Bot") {
+        const lastMessage = messageList[messageList.length-1];
+        if (messageList.length > 1 && lastMessage.author !== "Bot") {
             timer = setTimeout(() => {
                 setMessageList(messageList => ([...messageList, {
                     author: "Bot",
