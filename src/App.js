@@ -1,16 +1,23 @@
 import './App.css';
-import {useState, useEffect} from 'react';
+import {useState, useEffect, useRef} from 'react';
+import Box from '@mui/material/Box';
+import List from '@mui/material/List';
+import ListItem from '@mui/material/ListItem';
+import ListItemButton from '@mui/material/ListItemButton';
+import ListItemIcon from '@mui/material/ListItemIcon';
+import ListItemText from '@mui/material/ListItemText';
+import Divider from '@mui/material/Divider';
+import InboxIcon from '@mui/icons-material/Inbox';
+import DraftsIcon from '@mui/icons-material/Drafts';
 
 
 export function App(props) {
 
-    const [messageList, setMessageList] = useState([{}]);
+    const userMessageStyle = "user-message d-flex justify-content-end bg-gradient";
 
-    const [botMessage, setBotMessage] = useState([{
-        author: "Bot",
-        message: "Bot message",
-        styleInfo: "robot-message d-flex bg-gradient"
-    }]);
+    const botMessageStyle = "robot-message d-flex bg-gradient";
+
+    const [messageList, setMessageList] = useState([{}]);
 
     const [message, setMessage] = useState('');
 
@@ -23,23 +30,42 @@ export function App(props) {
         {id: 16, chatName: 'Чат 16'}
     ]);
 
+    const inputMessageRef = useRef(null);
+
     const handleOnClickSendButton = () => {
-        setMessageList(messageList => ([...messageList, {
-            author: "User1",
-            message: message,
-            styleInfo: "user-message d-flex justify-content-end bg-gradient"
-        }]));
-        setMessage(message => (message = ''));
+        if(message){
+            let lastMessageId = messageList.length;
+            setMessageList(messageList => ([...messageList, {
+                messageId: lastMessageId++,
+                author: "User1",
+                message: message,
+                styleInfo: userMessageStyle
+            }]));
+            setMessage('');
+            inputMessageRef.current?.focus();
+        }
     }
 
     useEffect(() => {
-        if (messageList.length > 1 && messageList[messageList.length - 1].author !== "Bot") {
-            const timer = setTimeout(() => {
-                setMessageList(messageList => ([...messageList, ...botMessage]));
+        let timer = null;
+        const lastMessage = messageList[messageList.length-1];
+        if (messageList.length > 1 && lastMessage.author !== "Bot") {
+            timer = setTimeout(() => {
+                let lastMessageId = messageList.length;
+                setMessageList(messageList => ([...messageList, {
+                    messageId: lastMessageId++,
+                    author: "Bot",
+                    message: "Bot message",
+                    styleInfo: botMessageStyle
+                }]));
             }, 1500);
-            return () => clearTimeout(timer);
         }
+        return () => clearTimeout(timer)
     }, [messageList]);
+
+    useEffect(() => {
+        inputMessageRef.current?.focus();
+    }, []);
 
     return (
         <div className="App">
@@ -52,11 +78,15 @@ export function App(props) {
                         </div>
                     </div>
                     <div className="left-side-block-chat-info">
+                        <List>
                         {chatList.map((item) => (
-                            <div className="chat-name" key={item.id}>
-                                <p className="align-self-center">{item.chatName}</p>
-                            </div>
+                            <ListItem disablePadding key={item.id}>
+                                <ListItemButton>
+                                    <ListItemText primary={item.chatName} />
+                                </ListItemButton>
+                            </ListItem>
                         ))}
+                        </List>
                     </div>
                 </div>
                 <div className="right-side-block col-8 bg-light">
@@ -65,14 +95,14 @@ export function App(props) {
                     </div>
                     <div className="right-side-block-chat-message">
                         {messageList.map((item) => (
-                            <div className={item.styleInfo} key={item}>
+                            <div className={item.styleInfo} key={item.messageId}>
                                 <p className="align-self-center">{item.message}</p>
                             </div>
                         ))}
                     </div>
                     <div className="right-side-block-message-input bg-light">
                         <div className="input-group message-input">
-                            <input type="text" className="form-control" placeholder="Введите текст сообщения"
+                            <input  ref={inputMessageRef} type="text" className="form-control" placeholder="Введите текст сообщения"
                                    value={message} onChange={(e) => setMessage(e.target.value)}/>
                             <button className="btn btn-outline-success" onClick={handleOnClickSendButton}>Отправить
                             </button>
