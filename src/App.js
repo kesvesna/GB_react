@@ -1,5 +1,22 @@
 import './App.css';
-import {useState, useEffect} from 'react';
+import {useState, useEffect, useRef} from 'react';
+import Box from '@mui/material/Box';
+import List from '@mui/material/List';
+import ListItem from '@mui/material/ListItem';
+import ListItemButton from '@mui/material/ListItemButton';
+import ListItemIcon from '@mui/material/ListItemIcon';
+import ListItemText from '@mui/material/ListItemText';
+import Divider from '@mui/material/Divider';
+import InboxIcon from '@mui/icons-material/Inbox';
+import DraftsIcon from '@mui/icons-material/Drafts';
+import TextField from '@mui/material/TextField';
+import Button from '@mui/material/Button';
+import Stack from '@mui/material/Stack';
+import SearchIcon from '@mui/icons-material/Search';
+import SendIcon from '@mui/icons-material/Send';
+import Avatar from '@mui/material/Avatar';
+import Chip from '@mui/material/Chip';
+
 
 export function App(props) {
 
@@ -20,14 +37,19 @@ export function App(props) {
         {id: 16, chatName: 'Чат 16'}
     ]);
 
+    const inputMessageRef = useRef(null);
+
     const handleOnClickSendButton = () => {
         if(message){
+            let lastMessageId = messageList.length;
             setMessageList(messageList => ([...messageList, {
+                messageId: lastMessageId++,
                 author: "User1",
                 message: message,
                 styleInfo: userMessageStyle
             }]));
             setMessage('');
+            inputMessageRef.current?.focus();
         }
     }
 
@@ -36,7 +58,9 @@ export function App(props) {
         const lastMessage = messageList[messageList.length-1];
         if (messageList.length > 1 && lastMessage.author !== "Bot") {
             timer = setTimeout(() => {
+                let lastMessageId = messageList.length;
                 setMessageList(messageList => ([...messageList, {
+                    messageId: lastMessageId++,
                     author: "Bot",
                     message: "Bot message",
                     styleInfo: botMessageStyle
@@ -46,22 +70,28 @@ export function App(props) {
         return () => clearTimeout(timer)
     }, [messageList]);
 
+    useEffect(() => {
+        inputMessageRef.current?.focus();
+    }, []);
+
     return (
         <div className="App">
             <div className="container-fluid">
                 <div className="left-side-block col-3 bg-light">
-                    <div className="left-side-block-header">
-                        <div className="input-group">
-                            <input type="search" className="form-control rounded" placeholder="Поиск"/>
-                            <button type="button" className="btn btn-outline-primary">Найти</button>
-                        </div>
-                    </div>
+                        <Stack spacing={0} direction="row" className="search-row">
+                            <TextField label="Найти" variant="outlined" />
+                            <Button variant="outlined"><SearchIcon/></Button>
+                        </Stack>
                     <div className="left-side-block-chat-info">
+                        <List>
                         {chatList.map((item) => (
-                            <div className="chat-name" key={item.id}>
-                                <p className="align-self-center">{item.chatName}</p>
-                            </div>
+                            <ListItem disablePadding key={item.id}>
+                                <ListItemButton>
+                                    <ListItemText primary={item.chatName} />
+                                </ListItemButton>
+                            </ListItem>
                         ))}
+                        </List>
                     </div>
                 </div>
                 <div className="right-side-block col-8 bg-light">
@@ -70,18 +100,15 @@ export function App(props) {
                     </div>
                     <div className="right-side-block-chat-message">
                         {messageList.map((item) => (
-                            <div className={item.styleInfo} key={item}>
+                            <div className={item.styleInfo} key={item.messageId}>
                                 <p className="align-self-center">{item.message}</p>
                             </div>
                         ))}
                     </div>
                     <div className="right-side-block-message-input bg-light">
-                        <div className="input-group message-input">
-                            <input type="text" className="form-control" placeholder="Введите текст сообщения"
-                                   value={message} onChange={(e) => setMessage(e.target.value)}/>
-                            <button className="btn btn-outline-success" onClick={handleOnClickSendButton}>Отправить
-                            </button>
-                        </div>
+                            <TextField label="Введите текст сообщения" variant="outlined"
+                                       ref={inputMessageRef}  value={message} onChange={(e) => setMessage(e.target.value)}/>
+                            <Button variant="outlined" onClick={handleOnClickSendButton}><SendIcon/></Button>
                     </div>
                 </div>
             </div>

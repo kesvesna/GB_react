@@ -22,13 +22,15 @@
 }
 
 .left-side-block-chat-info {
-	height: 80vh;
+	height: 78vh;
 	border-radius: 5px;
-	padding-top: 3vh;
 	overflow-x: hidden;
 }
 
-.left-side-block-header,
+.search-row {
+	height: 15vh;
+}
+
 .right-side-block-header,
 .right-side-block-message-input {
 	height: 8vh;
