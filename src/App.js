@@ -1,15 +1,17 @@
 import './App.css';
 import {useState, useEffect, useRef} from 'react';
-import Box from '@mui/material/Box';
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import ListItemButton from '@mui/material/ListItemButton';
-import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
-import Divider from '@mui/material/Divider';
-import InboxIcon from '@mui/icons-material/Inbox';
-import DraftsIcon from '@mui/icons-material/Drafts';
-
+import TextField from '@mui/material/TextField';
+import Button from '@mui/material/Button';
+import Stack from '@mui/material/Stack';
+import SearchIcon from '@mui/icons-material/Search';
+import SendIcon from '@mui/icons-material/Send';
+import Container from '@mui/material/Container';
+import { createTheme, ThemeProvider } from '@material-ui/core/styles';
+import Typography from "@material-ui/core/Typography";
 
 export function App(props) {
 
@@ -64,35 +66,48 @@ export function App(props) {
     }, [messageList]);
 
     useEffect(() => {
-        inputMessageRef.current?.focus();
+        inputMessageRef.current.focus();
     }, []);
 
+    const theme = createTheme({
+        palette: {
+            primary: {
+                light: '#757ce8',
+                main: '#3f50b5',
+                dark: '#002884',
+                contrastText: '#fff',
+            },
+            secondary: {
+                light: '#ff7961',
+                main: '#f44336',
+                dark: '#ba000d',
+                contrastText: '#000',
+            },
+        },
+    });
+
     return (
-        <div className="App">
+
+            <ThemeProvider theme={theme}>
+                <div className="App">
             <div className="container-fluid">
-                <div className="left-side-block col-3 bg-light">
-                    <div className="left-side-block-header">
-                        <div className="input-group">
-                            <input type="search" className="form-control rounded" placeholder="Поиск"/>
-                            <button type="button" className="btn btn-outline-primary">Найти</button>
-                        </div>
-                    </div>
-                    <div className="left-side-block-chat-info">
-                        <List>
-                        {chatList.map((item) => (
-                            <ListItem disablePadding key={item.id}>
-                                <ListItemButton>
-                                    <ListItemText primary={item.chatName} />
-                                </ListItemButton>
-                            </ListItem>
-                        ))}
+                    <Container className="left-side-block bg-light">
+                        <Stack direction="row" className="search-row">
+                            <TextField size="small" fullWidth label="Найти" variant="outlined" />
+                            <Button className="search-button" variant="outlined"><SearchIcon/></Button>
+                        </Stack>
+                        <List className="left-side-block-chat-info">
+                            {chatList.map((item) => (
+                                <ListItem disablePadding key={item.id}>
+                                    <ListItemButton>
+                                        <ListItemText primary={item.chatName} />
+                                    </ListItemButton>
+                                </ListItem>
+                            ))}
                         </List>
-                    </div>
-                </div>
+                    </Container>
                 <div className="right-side-block col-8 bg-light">
-                    <div className="right-side-block-header bg-light">
-                        <p>Чат 1</p>
-                    </div>
+                    <Typography className="chat-name">Чат 1</Typography>
                     <div className="right-side-block-chat-message">
                         {messageList.map((item) => (
                             <div className={item.styleInfo} key={item.messageId}>
@@ -100,17 +115,17 @@ export function App(props) {
                             </div>
                         ))}
                     </div>
-                    <div className="right-side-block-message-input bg-light">
-                        <div className="input-group message-input">
-                            <input  ref={inputMessageRef} type="text" className="form-control" placeholder="Введите текст сообщения"
-                                   value={message} onChange={(e) => setMessage(e.target.value)}/>
-                            <button className="btn btn-outline-success" onClick={handleOnClickSendButton}>Отправить
-                            </button>
-                        </div>
-                    </div>
+                        <Stack direction="row">
+                            <TextField fullWidth label="Введите текст сообщения" variant="outlined"
+                                       ref={inputMessageRef}  value={message}
+                                       onChange={(e) => setMessage(e.target.value)}/>
+                            <Button variant="outlined" onClick={handleOnClickSendButton}><SendIcon/></Button>
+                        </Stack>
                 </div>
             </div>
-        </div>
+                </div>
+            </ThemeProvider>
+
     );
 }
 

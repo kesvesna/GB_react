@@ -1,3 +1,31 @@
+*,
+*::before,
+*::after {
+	box-sizing: border-box;
+}
+
+ul[class],
+ol[class] {
+	padding: 0;
+}
+
+body,
+h1,
+h2,
+h3,
+h4,
+p,
+ul[class],
+ol[class],
+li,
+figure,
+figcaption,
+blockquote,
+dl,
+dd {
+	margin: 0;
+}
+
 .container-fluid {
 	height: 100vh;
 	display: flex;
@@ -13,40 +41,31 @@
 	padding: 1vh;
 }
 
-.left-side-block {
-	margin-left: 5vh;
-}
 
 .right-side-block {
 	margin-left: 5vh;
 }
 
 .left-side-block-chat-info {
-	height: 80vh;
-	border-radius: 5px;
-	padding-top: 3vh;
+	max-height: 81vh;
 	overflow-x: hidden;
 }
 
-.left-side-block-header,
+.search-row {
+	height: 6vh;
+	margin-bottom: 5px;
+}
+
 .right-side-block-header,
 .right-side-block-message-input {
 	height: 8vh;
 	border-radius: 5px;
 }
-.right-side-block-header {
-	text-align: center;
-	padding-top: 1vh;
-}
 
 .right-side-block-chat-message {
-	height: 72vh;
 	border-radius: 5px;
-}
-
-.message-input,
-.input-group {
-	height: 100%;
+	height: 75vh;
+	overflow-x: hidden;
 }
 
 .user-message,
@@ -66,19 +85,12 @@
 	background-color: lightgray;
 }
 
-
-.right-side-block-chat-message {    
-    max-height: 72vh;
-    overflow-x: hidden;
-}
-
 .chat-name {
-	height: 8vh;
-	border-radius: 5px;
-	padding: 0 12px;
+	text-align: center;
 }
 
-.chat-name:hover {
-	background-color: lightgrey;
+.search-button {
+	height: 100%;
 }
+
 
