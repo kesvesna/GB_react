@@ -1,27 +1,16 @@
-//import { createStore } from "redux";
+import {createStore} from "redux";
+import {INCREMENT, DECREMENT} from "./types";
 
-export const createStore = (initialState, reducer) => {
-    let currentState = initialState;
-    const listeners = [];
-    const getState = () => currentState;
-    const subscribe = (listener) => listeners.push(listener);
-    const dispatch = (action) => {
-        currentState = reducer(currentState, action)
-        listeners.forEach((listener) => listener());
-        return action;
-    }
-
-    return {getState, subscribe, dispatch};
-};
 const reducer = (state, action) => {
     switch (action.type) {
-        case "INCREMENT":
+        case INCREMENT:
             return {...state, count: state.count + 1};
-        case "DECREMENT":
+        case DECREMENT:
             return {...state, count: state.count - 1};
         default:
             return state;
     }
 }
 
-export const store = createStore({count: 0}, reducer)
+export const store = createStore(reducer, {count: 0});
+

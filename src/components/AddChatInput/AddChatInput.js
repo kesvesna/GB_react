@@ -4,7 +4,7 @@ import AddIcon from "@mui/icons-material/Add";
 import * as React from "react";
 import "./AddChatInput.css"
 
-export function AddChatInput({inputAddChat, addChat, setChatAdd, handleClickOnChatAddButton}){
+export function AddChatInput({inputAddChat, addChat, setChatAdd, handleClickOnChatAddButton}) {
     return (
         <Stack direction="row" className="add-chat">
             <TextField inputRef={inputAddChat} value={addChat}

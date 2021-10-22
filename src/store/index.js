@@ -2,14 +2,18 @@ import React from "react";
 import {createStore} from "redux";
 import {useSelector, useDispatch} from "react-redux";
 import {ProfileReducer} from "./reducer";
-import {INCREMENT, DECREMENT} from "./types";
 import Card from '@mui/material/Card';
-import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
 import Typography from '@mui/material/Typography';
+import { setIncrement, setDecrement } from './actions';
+import Avatar from '@mui/material/Avatar';
+import Stack from '@mui/material/Stack';
+import Link from '@mui/material/Link';
+import manulPicture from '../images/avatar/Manul.PNG';
 
-export * from "./actions";
-export * from "./reducer";
+
+export {} from "./actions";
+export {} from "./reducer";
 
 export function ProfilePage() {
 
@@ -18,21 +22,35 @@ export function ProfilePage() {
     const count = useSelector((state) => state.count);
     const dispatch = useDispatch();
 
-    const increment = () => dispatch({type: INCREMENT});
-    const decrement = () => dispatch({type: DECREMENT});
+    const increment = () => dispatch(setIncrement());
+    const decrement = () => dispatch(setDecrement());
 
     return (
-        <div style={{textAlign: 'center'}}>
-            <Card sx={{minWidth: 275, marginTop: '10px'}}>
+        <div style={{textAlign: 'center', display: 'flex', justifyContent: 'center'}}>
+            <Card sx={{width: '100vh', marginTop: '10px', height: '80vh'}}>
                 <CardContent>
-                    <Typography sx={{fontSize: 14}} color="text.secondary" gutterBottom>
-                        Geek Brains
-                    </Typography>
+                    <Stack direction="row" sx={{ display: 'flex', justifyContent: 'center'}}>
+                        <Avatar
+                            alt="Manul picture"
+                            src={manulPicture}
+                            sx={{ width: 200, height: 200, alignSelf: 'center' }}
+                        />
+                    </Stack>
                     <Typography variant="h5" component="div">
-                        React course
+                        Гончаренко Евгений
                     </Typography>
                     <Typography sx={{mb: 1.5}} color="text.secondary">
-                        Lesson 5 Redux
+                        Fullstack middle
+                    </Typography>
+                    <Typography sx={{mb: 1.5}} color="text.secondary">
+                        Frontend: HTML, CSS, Javascript, React, PHP
+                    </Typography>
+                    <Typography sx={{mb: 1.5}} color="text.secondary">
+                        Backend: PHP, Mysql, PostgresQL, Yii2
+                    </Typography>
+                    <Typography sx={{mb: 1.5}} color="text.secondary">
+                        Портфолио: <Link href="https://meacom.ru">meacom.ru</Link>, <Link href="https://nalogplanet.ru">nalogplanet.ru</Link>,
+                        <Link href="http://hdesk.space"> hdesk.space</Link>
                     </Typography>
                     <Typography variant="body2">
                         Count {count}

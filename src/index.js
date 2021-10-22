@@ -6,12 +6,12 @@ import {BrowserRouter, Switch, Route} from "react-router-dom";
 import {ProfilePage} from "./store";
 import {store} from "./store/create-store";
 import {Provider} from "react-redux";
-import { MyNavBar } from './components/AppBar/AppBar';
+import {MyNavBar} from './components/AppBar/AppBar';
 
 ReactDOM.render(
     <React.StrictMode>
         <BrowserRouter>
-            <MyNavBar />
+            <MyNavBar/>
             <Switch>
                 <Route path="/profile">
                     <Provider store={store}>

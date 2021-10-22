@@ -4,8 +4,8 @@ import {createTheme, ThemeProvider} from '@material-ui/core/styles';
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
 import {} from "./store/create-store";
-import { LeftPanel } from "./components/LeftPanel/LeftPanel";
-import { RightPanel } from "./components/RightPanel/RightPanel"
+import {LeftPanel} from "./components/LeftPanel/LeftPanel";
+import {RightPanel} from "./components/RightPanel/RightPanel"
 
 const theme = createTheme({
     palette: {
@@ -170,14 +170,14 @@ export function App() {
             <div className="App">
                 <Box sx={{flexGrow: 1}}>
                     <Grid container spacing={1}>
-                       <LeftPanel chats={chats}
-                                  inputAddChat={inputAddChat}
-                                  addChat={addChat}
-                                  setChatAdd={setChatAdd}
-                                  handleClickOnChatAddButton={handleClickOnChatAddButton}
-                                  updateCurrentChat={updateCurrentChat}
-                                  currentChat={currentChat}
-                                  deleteChat={deleteChat}/>
+                        <LeftPanel chats={chats}
+                                   inputAddChat={inputAddChat}
+                                   addChat={addChat}
+                                   setChatAdd={setChatAdd}
+                                   handleClickOnChatAddButton={handleClickOnChatAddButton}
+                                   updateCurrentChat={updateCurrentChat}
+                                   currentChat={currentChat}
+                                   deleteChat={deleteChat}/>
                         <RightPanel currentChat={currentChat}
                                     currentMessages={currentMessages}
                                     inputRef={inputRef}

@@ -1,7 +1,7 @@
 import './MessageList.css';
 import Stack from '@mui/material/Stack';
 import * as React from "react";
-import { Item } from '../Item/Item';
+import {Item} from '../Item/Item';
 
 export function MessageList({currentMessages}) {
     return (

@@ -6,7 +6,7 @@ import AppBar from "@mui/material/AppBar";
 import React from "react";
 import './AppBar.css';
 
-export function MyNavBar(){
+export function MyNavBar() {
     return (
         <AppBar position="static">
             <Toolbar>
@@ -15,10 +15,10 @@ export function MyNavBar(){
                         <Link href="/" className="app-bar-link">Home</Link>
                     </ListItem>
                     <ListItem>
-                        <Link href="/chats"  className="app-bar-link">Chats</Link>
+                        <Link href="/chats" className="app-bar-link">Chats</Link>
                     </ListItem>
                     <ListItem>
-                        <Link href="/profile"  className="app-bar-link">Profile</Link>
+                        <Link href="/profile" className="app-bar-link">Profile</Link>
                     </ListItem>
                 </List>
             </Toolbar>

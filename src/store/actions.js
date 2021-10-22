@@ -1,5 +1,9 @@
 import {INCREMENT, DECREMENT} from "./types";
 
-export const increment = () => {
+export const setIncrement = () => {
     return {type: INCREMENT};
+}
+
+export const setDecrement = () => {
+    return {type: DECREMENT};
 }
