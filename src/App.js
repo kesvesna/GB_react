@@ -6,7 +6,8 @@ import Grid from '@mui/material/Grid';
 import {} from "./store/create-store";
 import {LeftPanel} from "./components/LeftPanel/LeftPanel";
 import {RightPanel} from "./components/RightPanel/RightPanel"
-import { useParams } from "react-router";
+
+// TODO: change click to action click, add dispatch,
 
 const theme = createTheme({
     palette: {

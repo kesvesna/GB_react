@@ -2,7 +2,7 @@ import {createStore} from "redux";
 import {INCREMENT, DECREMENT} from "./types";
 
 // TODO: chatsReducer, rootReducer by combineReducer, createStore with rootReducer, state ?,
-// TODO: change click to action click, add dispatch,
+
 
 const reducer = (state, action) => {
     switch (action.type) {
