@@ -6,6 +6,8 @@ import Grid from '@mui/material/Grid';
 import {} from "./store/create-store";
 import {LeftPanel} from "./components/LeftPanel/LeftPanel";
 import {RightPanel} from "./components/RightPanel/RightPanel"
+import {handleAddMessageToChat} from './store/chats/actions';
+import {useDispatch} from "react-redux";
 
 // TODO: change click to action click, add dispatch,
 
@@ -167,6 +169,8 @@ export function App() {
         return () => clearTimeout(timer)
     }, [currentMessages]);
 
+    const dispatch = useDispatch();
+
     return (
         <ThemeProvider theme={theme}>
             <div className="App">
@@ -185,7 +189,9 @@ export function App() {
                                     inputRef={inputRef}
                                     message={message}
                                     setMessage={setMessage}
-                                    handleOnClickSendButton={handleOnClickSendButton}
+                                    handleOnClickSendButton={(e) => {
+                                        dispatch(handleAddMessageToChat(e.target.value, currentChat))
+                                    }}
                                     chats={chats}/>
                     </Grid>
                 </Box>

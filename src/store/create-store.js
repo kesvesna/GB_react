@@ -1,10 +1,10 @@
 import {createStore} from "redux";
 import {INCREMENT, DECREMENT} from "./types";
 
-// TODO: chatsReducer, rootReducer by combineReducer, createStore with rootReducer, state ?,
+import {combineReducers} from 'redux';
+import {chatsReducer} from './chats/reducer';
 
-
-const reducer = (state, action) => {
+const reducer = (state = {count: 0}, action) => {
     switch (action.type) {
         case INCREMENT:
             return {...state, count: state.count + 1};
@@ -15,4 +15,9 @@ const reducer = (state, action) => {
     }
 }
 
-export const store = createStore(reducer, {count: 0});
+export const rootReducer = combineReducers({
+    reducer,
+    chatsReducer
+})
+
+export const store = createStore(rootReducer);

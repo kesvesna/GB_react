@@ -5,7 +5,7 @@ import {ProfileReducer} from "./reducer";
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import Typography from '@mui/material/Typography';
-import { setIncrement, setDecrement } from './actions';
+import {setIncrement, setDecrement} from './actions';
 import Avatar from '@mui/material/Avatar';
 import Stack from '@mui/material/Stack';
 import Link from '@mui/material/Link';
@@ -28,11 +28,11 @@ export function ProfilePage() {
         <div style={{textAlign: 'center', display: 'flex', justifyContent: 'center'}}>
             <Card sx={{width: '100vh', marginTop: '10px', height: '80vh'}}>
                 <CardContent>
-                    <Stack direction="row" sx={{ display: 'flex', justifyContent: 'center'}}>
+                    <Stack direction="row" sx={{display: 'flex', justifyContent: 'center'}}>
                         <Avatar
                             alt="Manul picture"
                             src={manulPicture}
-                            sx={{ width: 200, height: 200, alignSelf: 'center' }}
+                            sx={{width: 200, height: 200, alignSelf: 'center'}}
                         />
                     </Stack>
                     <Typography variant="h5" component="div">
@@ -45,7 +45,8 @@ export function ProfilePage() {
                         Backend: PHP, Mysql, PostgresQL, Yii2
                     </Typography>
                     <Typography sx={{mb: 1.5}} color="text.secondary">
-                        Portfolio: <Link href="https://meacom.ru">meacom.ru</Link>, <Link href="https://nalogplanet.ru">nalogplanet.ru</Link>,
+                        Portfolio: <Link href="https://meacom.ru">meacom.ru</Link>, <Link
+                        href="https://nalogplanet.ru">nalogplanet.ru</Link>,
                         <Link href="http://hdesk.space"> hdesk.space</Link>
                     </Typography>
                     <Typography variant="body2">

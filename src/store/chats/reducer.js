@@ -1,4 +1,4 @@
-import { HANDLE_ADD_MESSAGE_TO_CHAT } from "./types";
+import {HANDLE_ADD_MESSAGE_TO_CHAT} from "./types";
 
 const initialState = {
     chats: {
@@ -30,16 +30,18 @@ const initialState = {
 }
 
 export const chatsReducer = (state = initialState, action) => {
-    switch(action.type){
+    switch (action.type) {
         case HANDLE_ADD_MESSAGE_TO_CHAT:
             return {
                 ...state, chats: Object.keys(state.chats).map(chat => {
-                    return chat === action.payload.currentChat ? {...chat, messages: [{
+                    return chat === action.payload.currentChat ? {
+                        ...chat, messages: [{
                             id: 7,
                             author: 'User',
                             message: action.payload.message,
                             date: new Date(),
-                        }]} : chat
+                        }]
+                    } : chat
                 })
             };
         default:

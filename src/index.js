@@ -19,12 +19,16 @@ ReactDOM.render(
                     </Provider>
                 </Route>
                 <Route exact path="/chats">
-                    <App>
-                    </App>
+                    <Provider store={store}>
+                        <App>
+                        </App>
+                    </Provider>
                 </Route>
                 <Route exact path="/chats/:id">
-                    <App>
-                    </App>
+                    <Provider store={store}>
+                        <App>
+                        </App>
+                    </Provider>
                 </Route>
                 <Route exact path="/">
                     <h1>Home page</h1>
