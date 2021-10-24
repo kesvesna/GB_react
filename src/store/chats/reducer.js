@@ -34,10 +34,10 @@ export const chatsReducer = (state = initialState, action) => {
         case HANDLE_ADD_MESSAGE_TO_CHAT:
             return {
                 ...state, chats: Object.keys(state.chats).map(chat => {
-                    return chat === action.type.currentChat ? {...chat, messages: [{
+                    return chat === action.payload.currentChat ? {...chat, messages: [{
                             id: 7,
                             author: 'User',
-                            message: action.type.message,
+                            message: action.payload.message,
                             date: new Date(),
                         }]} : chat
                 })

@@ -13,4 +13,3 @@ const reducer = (state, action) => {
 }
 
 export const store = createStore(reducer, {count: 0});
-
