@@ -42,7 +42,7 @@ export function ProfilePage() {
                         Frontend: HTML, CSS, Javascript, React, PHP
                     </Typography>
                     <Typography sx={{mb: 1.5}} color="text.secondary">
-                        Backend: PHP, Mysql, PostgresQL, Yii2
+                        Backend: PHP, Mysql, PostgreSQL, Yii2
                     </Typography>
                     <Typography sx={{mb: 1.5}} color="text.secondary">
                         Portfolio: <Link href="https://meacom.ru">meacom.ru</Link>, <Link
