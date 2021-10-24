@@ -9,8 +9,6 @@ import {RightPanel} from "./components/RightPanel/RightPanel"
 import {handleAddMessageToChat} from './store/chats/actions';
 import {useDispatch} from "react-redux";
 
-// TODO: change click to action click, add dispatch,
-
 const theme = createTheme({
     palette: {
         primary: {
@@ -28,7 +26,7 @@ const theme = createTheme({
     },
 });
 
-export function App() {
+export function App(props) {
 
     const inputRef = useRef(null);
 
@@ -189,8 +187,8 @@ export function App() {
                                     inputRef={inputRef}
                                     message={message}
                                     setMessage={setMessage}
-                                    handleOnClickSendButton={(e) => {
-                                        dispatch(handleAddMessageToChat(e.target.value, currentChat))
+                                    handleOnClickSendButton={() => {
+                                        dispatch(handleAddMessageToChat(message, currentChat))
                                     }}
                                     chats={chats}/>
                     </Grid>
