@@ -1,0 +1,1 @@
+export const HANDLE_ADD_MESSAGE_TO_CHAT = '@chats/ handle add message to chat';
