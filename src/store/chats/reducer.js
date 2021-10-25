@@ -1,4 +1,4 @@
-import {HANDLE_ADD_MESSAGE_TO_CHAT} from "./types";
+import {HANDLE_ADD_MESSAGE_TO_CHAT, SET_CURRENT_CHAT, ADD_CHAT, DELETE_CHAT} from "./types";
 
 const initialState = {
     chats: {
@@ -26,24 +26,37 @@ const initialState = {
                 {id: 4, author: 'Bot', message: 'Message 6', date: new Date()}
             ]
         },
-    }
+    },
+    currentChat: 'Choose chat',
+    message: '',
+    lastMessage: ''
 }
 
-export const chatsReducer = (state = initialState, action) => {
+export const ChatsReducer = (state = initialState, action) => {
     switch (action.type) {
         case HANDLE_ADD_MESSAGE_TO_CHAT:
             return {
-                ...state, chats: Object.keys(state.chats).map(chat => {
-                    return chat === action.payload.currentChat ? {
-                        ...chat, messages: [{
-                            id: 7,
-                            author: 'User',
-                            message: action.payload.message,
-                            date: new Date(),
-                        }]
-                    } : chat
-                })
+                ...state, state
             };
+        case SET_CURRENT_CHAT:
+            return {
+                ...state, currentChat: action.payload
+            };
+        case ADD_CHAT:
+            return {
+                ...state, chats:{
+                    ...state.chats, 'id4': {
+                        name: [action.payload],
+                        messages: [],
+                    }
+                }
+            }
+        case DELETE_CHAT:
+            let newChats = {...state.chats};
+            delete newChats[action.payload];
+            return  {
+                ...state, chats: {...newChats}
+            }
         default:
             return state;
     }

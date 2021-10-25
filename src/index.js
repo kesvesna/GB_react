@@ -11,24 +11,19 @@ import {MyNavBar} from './components/AppBar/AppBar';
 ReactDOM.render(
     <React.StrictMode>
         <BrowserRouter>
+            <Provider store={store}>
             <MyNavBar/>
             <Switch>
                 <Route path="/profile">
-                    <Provider store={store}>
                         <ProfilePage/>
-                    </Provider>
                 </Route>
                 <Route exact path="/chats">
-                    <Provider store={store}>
                         <App>
                         </App>
-                    </Provider>
                 </Route>
                 <Route exact path="/chats/:id">
-                    <Provider store={store}>
                         <App>
                         </App>
-                    </Provider>
                 </Route>
                 <Route exact path="/">
                     <h1>Home page</h1>
@@ -37,6 +32,7 @@ ReactDOM.render(
                     <h1>Error 404</h1>
                 </Route>
             </Switch>
+            </Provider>
         </BrowserRouter>
     </React.StrictMode>,
     document.getElementById('root')

@@ -1,9 +1,5 @@
 import {INCREMENT, DECREMENT} from "./types";
 
-// const action = { type: "GET USER", payload: {userId:23}}
-
-// const getUser = (userId) = {
-// return { type: "GET USER", payload: {userId}}
 
 export const ProfileReducer = (state = {count: 0}, action) => {
     switch (action.type) {

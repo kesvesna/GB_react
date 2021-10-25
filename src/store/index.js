@@ -1,28 +1,23 @@
 import React from "react";
-import {createStore} from "redux";
-import {useSelector, useDispatch} from "react-redux";
-import {ProfileReducer} from "./reducer";
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import Typography from '@mui/material/Typography';
-import {setIncrement, setDecrement} from './actions';
+import {increment, decrement} from './actions';
 import Avatar from '@mui/material/Avatar';
 import Stack from '@mui/material/Stack';
 import Link from '@mui/material/Link';
 import manulPicture from '../images/avatar/Manul.PNG';
+import {store} from './create-store';
+import {useSelector} from "react-redux";
 
 export {} from "./actions";
 export {} from "./reducer";
 
 export function ProfilePage() {
 
-    const store = createStore(ProfileReducer, {count: 0});
-
-    const count = useSelector((state) => state.count);
-    const dispatch = useDispatch();
-
-    const increment = () => dispatch(setIncrement());
-    const decrement = () => dispatch(setDecrement());
+    const count = useSelector(()=>{
+        return store.getState().ProfileReducer.count;
+    });
 
     return (
         <div style={{textAlign: 'center', display: 'flex', justifyContent: 'center'}}>
@@ -53,8 +48,8 @@ export function ProfilePage() {
                         Count {count}
                     </Typography>
                 </CardContent>
-                <button style={{marginRight: '10px'}} onClick={increment}>Increment</button>
-                <button style={{marginBottom: '10px'}} onClick={decrement}>Decrement</button>
+                <button style={{marginRight: '10px'}} onClick={()=>store.dispatch(increment())}>Increment</button>
+                <button style={{marginBottom: '10px'}} onClick={()=>store.dispatch(decrement())}>Decrement</button>
             </Card>
         </div>
     )

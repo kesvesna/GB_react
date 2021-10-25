@@ -6,16 +6,15 @@ import {MessageList} from "../MessageList/MessageList";
 import {Item} from '../Item/Item';
 import {MessageInput} from "../MessageInput/MessageInput";
 import './RightPanel.css';
+import {store} from '../../store/create-store';
+import {useSelector} from "react-redux";
 
-export function RightPanel({
-                               currentChat,
-                               currentMessages,
-                               inputRef,
-                               message,
-                               setMessage,
-                               handleOnClickSendButton,
-                               chats
-                           }) {
+export function RightPanel({currentMessages, inputRef, message, setMessage, handleOnClickSendButton, chats}) {
+
+    const currentChat = useSelector(()=>{
+        return store.getState().ChatsReducer.currentChat;
+    });
+
     return (
         <Grid item xs={9}>
             <Item className="right-panel-current-chat-item">
