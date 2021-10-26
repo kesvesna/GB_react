@@ -2,8 +2,17 @@ import './MessageList.css';
 import Stack from '@mui/material/Stack';
 import * as React from "react";
 import {Item} from '../Item/Item';
+import {store} from '../../store/create-store';
+import {useSelector} from "react-redux";
 
-export function MessageList({currentMessages}) {
+export function MessageList() {
+
+    const currentMessages = useSelector(()=>{
+        return store.getState().ChatsReducer.chats[store.getState().ChatsReducer.currentChat]?.messages ?? [];
+    });
+
+    console.log('currentMessages', currentMessages);
+
     return (
         <>
             {currentMessages.map((item) => (

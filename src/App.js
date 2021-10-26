@@ -58,9 +58,6 @@ export function App(props) {
         return setCurrentMessages(temp);
     }, [currentChat]);
 
-    const addMessageToChat= () => dispatch(handleAddMessageToChat(message, currentChat));
-
-
     const handleOnClickSendButton = () => {
         if (message) {
             let lastMessageId = chats[currentChat].messages.length;
@@ -87,24 +84,6 @@ export function App(props) {
             //setMessage('');
         }
         inputRef.current?.focus();
-    }
-
-    const handleClickOnChatAddButton = () => {
-        if (addChat) {
-            let lastChatId = Object.keys(chats)[Object.keys(chats).length - 1];
-            if (lastChatId !== undefined) {
-                lastChatId = 'id' + (parseInt(lastChatId.substr(2)) + 1);
-            } else {
-                lastChatId = 'id1';
-            }
-            // setChats({
-            //     ...chats, [lastChatId]:
-            //         {
-            //             name: addChat, messages: []
-            //         }
-            // });
-            setChatAdd('');
-        }
     }
 
     useEffect(() => {
@@ -144,17 +123,16 @@ export function App(props) {
     return (
         <ThemeProvider theme={theme}>
             <div className="App">
+                {console.log('chats', chats)}
                 <Box sx={{flexGrow: 1}}>
                     <Grid container spacing={1}>
                         <LeftPanel chats={chats}
                                    inputAddChat={inputAddChat}
                                    addChat={addChat}
-                                   setChatAdd={setChatAdd}
-                                   handleClickOnChatAddButton={handleClickOnChatAddButton}/>
+                                   setChatAdd={setChatAdd}/>
                         <RightPanel currentChat={currentChat}
                                     currentMessages={currentMessages}
                                     inputRef={inputRef}
-                                    handleOnClickSendButton={addMessageToChat}
                                     chats={chats}/>
                     </Grid>
                 </Box>
