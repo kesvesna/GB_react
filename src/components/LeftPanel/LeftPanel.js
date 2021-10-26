@@ -7,16 +7,8 @@ import {ChatList} from "../ChatList/ChatList";
 import {Item} from '../Item/Item';
 import {AddChatInput} from "../AddChatInput/AddChatInput";
 
-export function LeftPanel({
-                              chats,
-                              inputAddChat,
-                              addChat,
-                              setChatAdd,
-                              handleClickOnChatAddButton,
-                              updateCurrentChat,
-                              currentChat,
-                              deleteChat
-                          }) {
+export function LeftPanel() {
+
     return (
         <Grid item xs={3}>
             <Item style={{height: '10vh'}}>
@@ -26,14 +18,10 @@ export function LeftPanel({
                 </Stack>
             </Item>
             <Item style={{height: '10vh'}}>
-                <AddChatInput inputAddChat={inputAddChat}
-                              addChat={addChat}
-                              setChatAdd={setChatAdd}
-                              handleClickOnChatAddButton={handleClickOnChatAddButton}/>
+                <AddChatInput/>
             </Item>
             <Item style={{height: '58vh', overflowX: 'auto'}}>
-                <ChatList chats={chats} updateCurrentChat={updateCurrentChat} currentChat={currentChat}
-                          deleteChat={deleteChat}/>
+                <ChatList/>
             </Item>
         </Grid>
     )

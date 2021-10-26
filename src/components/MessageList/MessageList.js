@@ -11,8 +11,6 @@ export function MessageList() {
         return store.getState().ChatsReducer.chats[store.getState().ChatsReducer.currentChat]?.messages ?? [];
     });
 
-    console.log('currentMessages', currentMessages);
-
     return (
         <>
             {currentMessages.map((item) => (

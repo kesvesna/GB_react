@@ -7,7 +7,7 @@ import {handleChangeMessage, handleAddMessageToChat} from "../../store/chats/act
 import {useSelector} from "react-redux";
 import {store} from "../../store/create-store";
 
-export function MessageInput({inputRef}) {
+export function MessageInput() {
 
     const message = useSelector(()=>{
         return store.getState().ChatsReducer.message;
@@ -20,8 +20,7 @@ export function MessageInput({inputRef}) {
 
     return (
         <Stack direction="row" className="message-input">
-            <TextField inputRef={inputRef} value={message}
-                       onChange={(e) => store.dispatch(handleChangeMessage(e.target.value))}
+            <TextField onChange={(e) => store.dispatch(handleChangeMessage(e.target.value))}
                        fullWidth id="standard-basic" label="Введите сообщение"
                        variant="standard"/>
             <SendIcon onClick={()=>store.dispatch(handleAddMessageToChat(message, currentChat))}/>

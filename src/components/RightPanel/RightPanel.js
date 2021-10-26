@@ -9,11 +9,15 @@ import './RightPanel.css';
 import {store} from '../../store/create-store';
 import {useSelector} from "react-redux";
 
-export function RightPanel({currentMessages, inputRef, message, setMessage, handleOnClickSendButton, chats}) {
+export function RightPanel() {
 
     const currentChat = useSelector(()=>{
         return store.getState().ChatsReducer.currentChat;
     });
+
+    const chats = useSelector(()=>{
+        return store.getState().ChatsReducer.chats;
+    })
 
     return (
         <Grid item xs={9}>
@@ -21,13 +25,10 @@ export function RightPanel({currentMessages, inputRef, message, setMessage, hand
                 <Chip icon={<InboxIcon/>} label={chats[currentChat]?.name ?? 'Choose chat'} variant="outlined"/>
             </Item>
             <Item className="right-panel-message-list-item">
-                <MessageList currentMessages={currentMessages}/>
+                <MessageList/>
             </Item>
             <Item className="message-input-item">
-                <MessageInput inputRef={inputRef}
-                              setMessage={setMessage}
-                              handleOnClickSendButton={handleOnClickSendButton}
-                              message={message}/>
+                <MessageInput/>
             </Item>
         </Grid>
     )
