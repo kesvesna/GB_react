@@ -7,7 +7,7 @@ import './ChatList.css';
 import {Link} from 'react-router-dom';
 import CloseIcon from '@mui/icons-material/Close';
 import {store} from '../../store/create-store';
-import {setCurrentChat, deleteChat} from "../../store/chats/actions";
+import {deleteChat} from "../../store/chats/actions";
 import {useSelector} from "react-redux";
 
 export function ChatList() {
