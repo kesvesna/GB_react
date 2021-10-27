@@ -3,35 +3,35 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import {App} from './App';
 import {BrowserRouter, Switch, Route} from "react-router-dom";
-import {ProfilePage} from "./store";
-import {store} from "./store/create-store";
+import {ProfilePage} from "./pages/profile/ProfilePage";
+import {store, persistor} from "./store/create-store";
 import {Provider} from "react-redux";
-import {MyNavBar} from './components/AppBar/AppBar';
+import {MyNavBar} from './components/presentations/AppBar/AppBar';
+import {HomePage} from "./pages/home/HomePage";
+import {ErrorPage} from "./pages/error/ErrorPage";
+import { PersistGate } from 'redux-persist/integration/react'
 
 ReactDOM.render(
     <React.StrictMode>
         <BrowserRouter>
             <Provider store={store}>
-            <MyNavBar/>
-            <Switch>
-                <Route path="/profile">
+                <PersistGate loading={null} persistor={persistor}>
+                <MyNavBar/>
+                <Switch>
+                    <Route path="/profile">
                         <ProfilePage/>
-                </Route>
-                <Route exact path="/chats">
-                        <App>
-                        </App>
-                </Route>
-                <Route exact path="/chats/:id">
-                        <App>
-                        </App>
-                </Route>
-                <Route exact path="/">
-                    <h1>Home page</h1>
-                </Route>
-                <Route path="*">
-                    <h1>Error 404</h1>
-                </Route>
-            </Switch>
+                    </Route>
+                    <Route exact path="/chats/:id?">
+                        <App/>
+                    </Route>
+                    <Route exact path="/">
+                        <HomePage/>
+                    </Route>
+                    <Route path="*">
+                        <ErrorPage/>
+                    </Route>
+                </Switch>
+                </PersistGate>
             </Provider>
         </BrowserRouter>
     </React.StrictMode>,
