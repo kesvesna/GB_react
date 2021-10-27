@@ -6,23 +6,18 @@ import {MessageList} from "../MessageList/MessageList";
 import {Item} from '../Item/Item';
 import {MessageInput} from "../MessageInput/MessageInput";
 import './RightPanel.css';
-import {store} from '../../store/create-store';
+import {useParams} from "react-router";
 import {useSelector} from "react-redux";
 
 export function RightPanel() {
 
-    const currentChat = useSelector(()=>{
-        return store.getState().ChatsReducer.currentChat;
-    });
-
-    const chats = useSelector(()=>{
-        return store.getState().ChatsReducer.chats;
-    })
+    const {id} = useParams();
+    const chats = useSelector((state) => state.ChatsReducer.chats);
 
     return (
         <Grid item xs={9}>
             <Item className="right-panel-current-chat-item">
-                <Chip icon={<InboxIcon/>} label={chats[currentChat]?.name ?? 'Choose chat'} variant="outlined"/>
+                <Chip icon={<InboxIcon/>} label={chats[id]?.name ?? 'Choose chat'} variant="outlined"/>
             </Item>
             <Item className="right-panel-message-list-item">
                 <MessageList/>

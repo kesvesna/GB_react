@@ -6,24 +6,22 @@ import './MessageInput.css';
 import {handleChangeMessage, handleAddMessageToChat} from "../../store/chats/actions";
 import {useSelector} from "react-redux";
 import {store} from "../../store/create-store";
+import {useParams} from "react-router";
 
 export function MessageInput() {
 
-    const message = useSelector(()=>{
+    const message = useSelector(() => {
         return store.getState().ChatsReducer.message;
     });
 
-    const currentChat = useSelector(()=>{
-        return store.getState().ChatsReducer.currentChat;
-    })
-
+    const {id} = useParams();
 
     return (
         <Stack direction="row" className="message-input">
             <TextField onChange={(e) => store.dispatch(handleChangeMessage(e.target.value))}
                        fullWidth id="standard-basic" label="Введите сообщение"
                        variant="standard"/>
-            <SendIcon onClick={()=>store.dispatch(handleAddMessageToChat(message, currentChat))}/>
+            <SendIcon onClick={() => store.dispatch(handleAddMessageToChat(message, id))}/>
         </Stack>
     )
 }

@@ -10,16 +10,14 @@ import {useSelector} from "react-redux";
 
 export function AddChatInput() {
 
-    const newChatName = useSelector(()=>{
-        return store.getState().ChatsReducer.newChatName;
-    });
+    const newChatName = useSelector((state) => state.ChatsReducer.newChatName);
 
 
     return (
         <Stack direction="row" className="add-chat">
             <TextField onChange={(e) => store.dispatch(handleAddNewChat(e.target.value))}
                        fullWidth id="standard-basic" label="Добавить чат" variant="standard"/>
-            <AddIcon onClick={()=>store.dispatch(addChat(newChatName))}/>
+            <AddIcon onClick={() => store.dispatch(addChat(newChatName))}/>
         </Stack>
     )
 

@@ -4,12 +4,14 @@ import * as React from "react";
 import {Item} from '../Item/Item';
 import {store} from '../../store/create-store';
 import {useSelector} from "react-redux";
+import {useParams} from "react-router";
 
 export function MessageList() {
 
-    const currentMessages = useSelector(()=>{
-        return store.getState().ChatsReducer.chats[store.getState().ChatsReducer.currentChat]?.messages ?? [];
-    });
+    const {id} = useParams();
+
+    const currentMessages = useSelector((state) =>
+        state.ChatsReducer.chats[id]?.messages ?? []);
 
     return (
         <>
