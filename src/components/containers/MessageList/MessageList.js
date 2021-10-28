@@ -21,17 +21,27 @@ export function MessageList() {
                 (item.author !== "Bot" &&
                     <Stack key={item.id} className="user-message-stack" display="row">
                         <Item key={item.id} className="message-item">
-                            {item.message}
-                            <CloseIcon style={{ float: 'right'}}  onClick={() => store.dispatch(handleDeleteMessage(id, item.id))}/>
+                            <Item>
+                                {item.author + ": "}{item.message}
+                                <CloseIcon style={{ float: 'right'}}  onClick={() => store.dispatch(handleDeleteMessage(id, item.id))}/>
+                            </Item>
+                            <Item style={{ textAlign: 'right'}}>
+                                {item.date}
+                            </Item>
                         </Item>
                     </Stack>)
                 ||
                 (item.author === "Bot" &&
                     <Stack key={item.id} className="bot-message-stack" display="row">
                         <Item key={item.id} className="message-item">
-                            {item.author + ": "}{item.message}
-                            <CloseIcon style={{ float: 'right'}}  onClick={() => store.dispatch(handleDeleteMessage(id, item.id))}/>
-                        </Item>
+                            <Item>
+                                {item.author + ": "}{item.message}{" : " + item.date}
+                                <CloseIcon style={{ float: 'right'}}  onClick={() => store.dispatch(handleDeleteMessage(id, item.id))}/>
+                            </Item>
+                            <Item style={{ textAlign: 'right'}}>
+                                {item.date}
+                            </Item>
+                       </Item>
                     </Stack>)
             ))
             }

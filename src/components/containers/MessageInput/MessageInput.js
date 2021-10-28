@@ -20,7 +20,7 @@ export function MessageInput() {
         <Stack direction="row" className="message-input">
             <TextField onChange={(e) => store.dispatch(handleChangeMessage(e.target.value))}
                        fullWidth id="standard-basic" label="Введите сообщение"
-                       variant="standard" value={message}/>
+                       variant="standard" value={message} autoFocus={true}/>
             <SendIcon onClick={() => store.dispatch(handleAddMessageToChat(message, id, 'User'))}/>
         </Stack>
     )

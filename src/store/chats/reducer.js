@@ -7,6 +7,7 @@ import {
     HANDLE_DELETE_MESSAGE
 } from "./types";
 import {nanoid} from 'nanoid'
+import { format } from 'date-fns'
 
 const initialState = {
     chats: {
@@ -55,7 +56,7 @@ export const ChatsReducer = (state = initialState, action) => {
                                 id: nanoid(),
                                 message: action.payload.message,
                                 author: action.payload.author,
-                                date: new Date()
+                                date: format(new Date(), 'dd:MM:yyyy HH:mm:ss')
                             }
                         ]
                     }
