@@ -3,7 +3,7 @@ import InboxIcon from "@mui/icons-material/Inbox";
 import Grid from "@mui/material/Grid";
 import * as React from "react";
 import {MessageList} from "../MessageList/MessageList";
-import {Item} from '../Item/Item';
+import {Item} from '../../presentations/Item/Item';
 import {MessageInput} from "../MessageInput/MessageInput";
 import './RightPanel.css';
 import {useParams} from "react-router";

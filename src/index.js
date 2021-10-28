@@ -4,16 +4,18 @@ import './index.css';
 import {App} from './App';
 import {BrowserRouter, Switch, Route} from "react-router-dom";
 import {ProfilePage} from "./pages/profile/ProfilePage";
-import {store} from "./store/create-store";
+import {store, persistor} from "./store/create-store";
 import {Provider} from "react-redux";
-import {MyNavBar} from './components/AppBar/AppBar';
+import {MyNavBar} from './components/presentations/AppBar/AppBar';
 import {HomePage} from "./pages/home/HomePage";
 import {ErrorPage} from "./pages/error/ErrorPage";
+import { PersistGate } from 'redux-persist/integration/react'
 
 ReactDOM.render(
     <React.StrictMode>
         <BrowserRouter>
             <Provider store={store}>
+                <PersistGate loading={null} persistor={persistor}>
                 <MyNavBar/>
                 <Switch>
                     <Route path="/profile">
@@ -29,6 +31,7 @@ ReactDOM.render(
                         <ErrorPage/>
                     </Route>
                 </Switch>
+                </PersistGate>
             </Provider>
         </BrowserRouter>
     </React.StrictMode>,

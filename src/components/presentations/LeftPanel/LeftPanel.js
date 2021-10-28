@@ -3,9 +3,9 @@ import TextField from '@mui/material/TextField';
 import Stack from '@mui/material/Stack';
 import SearchIcon from '@mui/icons-material/Search';
 import Grid from '@mui/material/Grid';
-import {ChatList} from "../ChatList/ChatList";
+import {ChatList} from "../../containers/ChatList/ChatList";
 import {Item} from '../Item/Item';
-import {AddChatInput} from "../AddChatInput/AddChatInput";
+import {AddChatInput} from "../../containers/AddChatInput/AddChatInput";
 
 export function LeftPanel() {
 

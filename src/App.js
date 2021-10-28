@@ -2,8 +2,8 @@ import * as React from 'react';
 import {createTheme, ThemeProvider} from '@material-ui/core/styles';
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
-import {LeftPanel} from "./components/LeftPanel/LeftPanel";
-import {RightPanel} from "./components/RightPanel/RightPanel"
+import {LeftPanel} from "./components/presentations/LeftPanel/LeftPanel";
+import {RightPanel} from "./components/containers/RightPanel/RightPanel"
 
 const theme = createTheme({
     palette: {

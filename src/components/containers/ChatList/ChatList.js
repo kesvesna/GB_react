@@ -6,8 +6,8 @@ import * as React from 'react';
 import './ChatList.css';
 import {Link} from 'react-router-dom';
 import CloseIcon from '@mui/icons-material/Close';
-import {store} from '../../store/create-store';
-import {deleteChat} from "../../store/chats/actions";
+import {store} from '../../../store/create-store';
+import {deleteChat} from "../../../store/chats/actions";
 import {useSelector} from "react-redux";
 
 export function ChatList() {
