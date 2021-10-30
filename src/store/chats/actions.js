@@ -3,7 +3,8 @@ import {
     ADD_CHAT,
     DELETE_CHAT,
     HANDLE_ADD_NEW_CHAT,
-    HANDLE_CHANGE_MESSAGE
+    HANDLE_CHANGE_MESSAGE,
+    HANDLE_DELETE_MESSAGE
 } from './types';
 
 export const handleAddMessageToChat = (message, chatId, author) => ({
@@ -30,3 +31,11 @@ export const handleAddNewChat = (newChatName) => ({
     type: HANDLE_ADD_NEW_CHAT,
     payload: newChatName
 })
+
+export const handleDeleteMessage = (chatId, messageId) => ({
+    type: HANDLE_DELETE_MESSAGE,
+    payload: {
+        chatId, messageId
+    }
+})
+

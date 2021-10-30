@@ -4,9 +4,10 @@ import {
     DELETE_CHAT,
     HANDLE_ADD_NEW_CHAT,
     HANDLE_CHANGE_MESSAGE,
-    CLEAR_CURRENT_MESSAGE
+    HANDLE_DELETE_MESSAGE
 } from "./types";
 import {nanoid} from 'nanoid'
+import { format } from 'date-fns'
 
 const initialState = {
     chats: {
@@ -36,13 +37,15 @@ const initialState = {
         },
     },
     message: '',
-    lastMessage: '',
     newChatName: ''
 }
 
 export const ChatsReducer = (state = initialState, action) => {
     switch (action.type) {
         case HANDLE_ADD_MESSAGE_TO_CHAT:
+            if(action.payload.message === ''){
+                return { ...state, message: ''}
+            }
             return {
                 ...state, chats: {
                     ...state.chats,
@@ -53,21 +56,26 @@ export const ChatsReducer = (state = initialState, action) => {
                                 id: nanoid(),
                                 message: action.payload.message,
                                 author: action.payload.author,
-                                date: new Date()
+                                date: format(new Date(), 'dd:MM:yyyy HH:mm:ss')
                             }
                         ]
                     }
-                }
+                },
+                message: ''
             };
         case HANDLE_CHANGE_MESSAGE:
             return {
                 ...state, message: action.payload
             }
         case ADD_CHAT:
+            if(action.payload === ''){
+                return state;
+            }
             return {
                 ...state, chats: {
                     ...state.chats, [nanoid()]: {name: action.payload, messages: []}
-                }
+                },
+                newChatName: ''
             }
         case DELETE_CHAT:
             let newChats = {...state.chats};
@@ -76,9 +84,24 @@ export const ChatsReducer = (state = initialState, action) => {
                 ...state, chats: {...newChats}
             }
         case HANDLE_ADD_NEW_CHAT:
+            if(action.payload === ''){
+                return state;
+            }
             return {
                 ...state, newChatName: action.payload
             }
+        case HANDLE_DELETE_MESSAGE:
+            let chat = {...state.chats[action.payload.chatId]};
+            const newMessages = chat.messages.filter(item => item.id !== action.payload.messageId);
+            return {
+                ...state, chats: {
+                    ...state.chats,
+                    [action.payload.chatId]: {
+                        ...state.chats[action.payload.chatId],
+                        messages:  [...newMessages]
+                    }
+                },
+            };
         default:
             return state;
     }

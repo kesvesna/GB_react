@@ -16,7 +16,7 @@ export function AddChatInput() {
     return (
         <Stack direction="row" className="add-chat">
             <TextField onChange={(e) => store.dispatch(handleAddNewChat(e.target.value))}
-                       fullWidth id="standard-basic" label="Добавить чат" variant="standard"/>
+                       fullWidth id="standard-basic" label="Добавить чат" variant="standard" value={newChatName}/>
             <AddIcon onClick={() => store.dispatch(addChat(newChatName))}/>
         </Stack>
     )

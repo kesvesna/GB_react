@@ -3,3 +3,8 @@ export const messageValueSelector = (currentChat) => (state) => {
         (chat) => chat[currentChat] === currentChat
     )?.value ?? ""
 }
+
+export const lastMessageSelector = (chatId)=>(state)=>{
+    const messages = state.ChatsReducer.chats[chatId];
+    return messages[messages.length - 1];
+}
