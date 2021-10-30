@@ -7,7 +7,7 @@ import {
     HANDLE_DELETE_MESSAGE
 } from "./types";
 import {nanoid} from 'nanoid'
-import { format } from 'date-fns'
+import {format} from 'date-fns'
 
 const initialState = {
     chats: {
@@ -43,8 +43,8 @@ const initialState = {
 export const ChatsReducer = (state = initialState, action) => {
     switch (action.type) {
         case HANDLE_ADD_MESSAGE_TO_CHAT:
-            if(action.payload.message === ''){
-                return { ...state, message: ''}
+            if (action.payload.message === '') {
+                return {...state, message: ''}
             }
             return {
                 ...state, chats: {
@@ -68,7 +68,7 @@ export const ChatsReducer = (state = initialState, action) => {
                 ...state, message: action.payload
             }
         case ADD_CHAT:
-            if(action.payload === ''){
+            if (action.payload === '') {
                 return state;
             }
             return {
@@ -84,7 +84,7 @@ export const ChatsReducer = (state = initialState, action) => {
                 ...state, chats: {...newChats}
             }
         case HANDLE_ADD_NEW_CHAT:
-            if(action.payload === ''){
+            if (action.payload === '') {
                 return state;
             }
             return {
@@ -98,7 +98,7 @@ export const ChatsReducer = (state = initialState, action) => {
                     ...state.chats,
                     [action.payload.chatId]: {
                         ...state.chats[action.payload.chatId],
-                        messages:  [...newMessages]
+                        messages: [...newMessages]
                     }
                 },
             };

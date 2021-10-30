@@ -20,6 +20,9 @@ export function MyNavBar() {
                     <ListItem>
                         <Link href="/profile" className="app-bar-link">Profile</Link>
                     </ListItem>
+                    <ListItem>
+                        <Link href="/gist" className="app-bar-link">Gist</Link>
+                    </ListItem>
                 </List>
             </Toolbar>
         </AppBar>
