@@ -18,6 +18,9 @@ const persistConfig = {
 
 const persistreducer = persistReducer(persistConfig, combineReducers({ChatsReducer, GistsReducer}))
 
-export const store = createStore(persistreducer, compose(applyMiddleware(crashReporter, botMessage, thunk.withExtraArgument({getGistsApi, searchGistsByUserNameApi})), window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()));
+export const store = createStore(persistreducer, compose(applyMiddleware(crashReporter, botMessage, thunk.withExtraArgument({
+    getGistsApi,
+    searchGistsByUserNameApi
+})), window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()));
 
 export const persistor = persistStore(store);

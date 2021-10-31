@@ -1,4 +1,11 @@
-import {getGistError, getGistStart, getGistSuccess, getGistByNameError, getGistByNameStart, getGistByNameSuccess} from './actions';
+import {
+    getGistError,
+    getGistStart,
+    getGistSuccess,
+    getGistByNameError,
+    getGistByNameStart,
+    getGistByNameSuccess
+} from './actions';
 
 export const getGists = (page = 1) => async (dispatch, _, api) => {
     try {
