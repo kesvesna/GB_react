@@ -23,9 +23,10 @@ export function MessageList() {
                         <Item key={item.id} className="message-item">
                             <Item>
                                 {item.author + ": "}{item.message}
-                                <CloseIcon style={{ float: 'right'}}  onClick={() => store.dispatch(handleDeleteMessage(id, item.id))}/>
+                                <CloseIcon style={{float: 'right'}}
+                                           onClick={() => store.dispatch(handleDeleteMessage(id, item.id))}/>
                             </Item>
-                            <Item style={{ textAlign: 'right'}}>
+                            <Item style={{textAlign: 'right'}}>
                                 {item.date}
                             </Item>
                         </Item>
@@ -36,12 +37,13 @@ export function MessageList() {
                         <Item key={item.id} className="message-item">
                             <Item>
                                 {item.author + ": "}{item.message}{" : " + item.date}
-                                <CloseIcon style={{ float: 'right'}}  onClick={() => store.dispatch(handleDeleteMessage(id, item.id))}/>
+                                <CloseIcon style={{float: 'right'}}
+                                           onClick={() => store.dispatch(handleDeleteMessage(id, item.id))}/>
                             </Item>
-                            <Item style={{ textAlign: 'right'}}>
+                            <Item style={{textAlign: 'right'}}>
                                 {item.date}
                             </Item>
-                       </Item>
+                        </Item>
                     </Stack>)
             ))
             }

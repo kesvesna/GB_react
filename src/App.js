@@ -4,6 +4,8 @@ import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
 import {LeftPanel} from "./components/presentations/LeftPanel/LeftPanel";
 import {RightPanel} from "./components/containers/RightPanel/RightPanel"
+import {firebaseApp} from "./api/v1/firebase/firebase";
+import {useState, useEffect} from "react";
 
 const theme = createTheme({
     palette: {
@@ -22,7 +24,7 @@ const theme = createTheme({
     },
 });
 
-export function App(props) {
+export function App() {
 
     return (
         <ThemeProvider theme={theme}>
