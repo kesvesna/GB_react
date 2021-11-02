@@ -1,15 +1,16 @@
 import axios from 'axios';
+import { withLogger } from "./logger";
 
 const BASE_URL = 'https://api.github.com';
 
 class Request {
     constructor(token) {
         this.token = token;
-        this.request = axios.create(
+        this.request = withLogger(axios.create(
             {
                 baseUrl: BASE_URL
             }
-        )
+        ));
     }
 
     setToken = (token) => {

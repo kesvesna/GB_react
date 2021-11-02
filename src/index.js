@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import {App} from './App';
@@ -11,6 +11,9 @@ import {HomePage} from "./pages/home/HomePage";
 import {ErrorPage} from "./pages/error/ErrorPage";
 import {PersistGate} from 'redux-persist/integration/react'
 import {GistPage} from "./pages/gist/GistPage";
+import {LoginPage} from "./pages/login/LoginPage";
+import {SignUpPage} from "./pages/sign-up/SignUpPage";
+import {PrivateRoute, PublicRoute} from "./components/route/Route";
 
 ReactDOM.render(
     <React.StrictMode>
@@ -19,21 +22,27 @@ ReactDOM.render(
                 <PersistGate loading={null} persistor={persistor}>
                     <MyNavBar/>
                     <Switch>
-                        <Route path="/profile">
+                        <PrivateRoute path="/profile">
                             <ProfilePage/>
-                        </Route>
-                        <Route exact path="/chats/:id?">
+                        </PrivateRoute>
+                        <PrivateRoute exact path="/chats/:id?">
                             <App/>
-                        </Route>
-                        <Route exact path="/gist">
+                        </PrivateRoute>
+                        <PrivateRoute exact path="/gist">
                             <GistPage/>
-                        </Route>
-                        <Route exact path="/">
+                        </PrivateRoute>
+                        <PublicRoute exact path="/login">
+                            <LoginPage/>
+                        </PublicRoute>
+                        <PublicRoute exact path="/sign-up">
+                            <SignUpPage/>
+                        </PublicRoute>
+                        <PublicRoute exact path="/">
                             <HomePage/>
-                        </Route>
-                        <Route path="*">
+                        </PublicRoute>
+                        <PublicRoute path="*">
                             <ErrorPage/>
-                        </Route>
+                        </PublicRoute>
                     </Switch>
                 </PersistGate>
             </Provider>

@@ -8,6 +8,7 @@ import {persistStore, persistReducer} from "redux-persist";
 import storage from 'redux-persist/lib/storage';
 import {getGistsApi, searchGistsByUserNameApi} from "../api/v1/gists";
 import thunk from "redux-thunk";
+import {SessionReducer} from "./session";
 
 const persistConfig = {
     key: "root",
@@ -16,7 +17,7 @@ const persistConfig = {
     whitelist: ['ChatsReducer']
 }
 
-const persistreducer = persistReducer(persistConfig, combineReducers({ChatsReducer, GistsReducer}))
+const persistreducer = persistReducer(persistConfig, combineReducers({ChatsReducer, GistsReducer, SessionReducer}))
 
 export const store = createStore(persistreducer, compose(applyMiddleware(crashReporter, botMessage, thunk.withExtraArgument({
     getGistsApi,
