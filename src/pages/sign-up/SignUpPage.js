@@ -1,6 +1,6 @@
 import './SignUpPage.css';
-import { AuthTemplate } from '../../components/templates';
-import { Link } from 'react-router-dom';
+import {AuthTemplate} from '../../components/templates';
+import {Link} from 'react-router-dom';
 import {AuthForm} from "../../components/containers/AuthForm/AuthForm";
 import {firebaseApp} from "../../api/v1/firebase/firebase";
 

@@ -1,1 +1,1 @@
-export const sessionSelector = (state)=>state.SessionReducer.session;
+export const sessionSelector = (state) => state.SessionReducer.session;

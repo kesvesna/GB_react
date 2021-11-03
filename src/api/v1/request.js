@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { withLogger } from "./logger";
+import {withLogger} from "./logger";
 
 const BASE_URL = 'https://api.github.com';
 
