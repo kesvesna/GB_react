@@ -4,40 +4,30 @@ import {
     DELETE_CHAT,
     HANDLE_ADD_NEW_CHAT,
     HANDLE_CHANGE_MESSAGE,
-    HANDLE_DELETE_MESSAGE
+    HANDLE_DELETE_MESSAGE,
+    GET_CHATS_SUCCESS,
+    GET_CHATS_ERROR,
+    GET_CHATS_START,
+    ADD_NEW_CHAT_SUCCESS, ADD_NEW_MESSAGE_TO_CHAT_SUCCESS,
 } from "./types";
 import {nanoid} from 'nanoid'
 import {format} from 'date-fns'
+import {addNewChat, getAllChatsApi, getLastChatIdApi, addNewChatApi} from "../../api/v1/chats/chats";
+import {useEffect} from "react";
+import {useDispatch} from "react-redux";
+import {getChats} from './thunks';
 
 const initialState = {
-    chats: {
-        [nanoid()]: {
-            name: 'Chat 1', messages: [
-                {id: nanoid(), author: 'User', message: 'Message 1', date: new Date()},
-                {id: nanoid(), author: 'Bot', message: 'Message 1', date: new Date()},
-                {id: nanoid(), author: 'User', message: 'Message 2', date: new Date()},
-                {id: nanoid(), author: 'Bot', message: 'Message 2', date: new Date()}
-            ]
-        },
-        [nanoid()]: {
-            name: 'Chat 2', messages: [
-                {id: nanoid(), author: 'User', message: 'Message 3', date: new Date()},
-                {id: nanoid(), author: 'Bot', message: 'Message 3', date: new Date()},
-                {id: nanoid(), author: 'User', message: 'Message 4', date: new Date()},
-                {id: nanoid(), author: 'Bot', message: 'Message 4', date: new Date()}
-            ]
-        },
-        [nanoid()]: {
-            name: 'Chat 3', messages: [
-                {id: nanoid(), author: 'User', message: 'Message 5', date: new Date()},
-                {id: nanoid(), author: 'Bot', message: 'Message 5', date: new Date()},
-                {id: nanoid(), author: 'User', message: 'Message 6', date: new Date()},
-                {id: nanoid(), author: 'Bot', message: 'Message 6', date: new Date()}
-            ]
-        },
-    },
+    chats: {},
+    // chats: {
+    //     chat1: { name: 'Chat 1'},
+    //     chat2: {name: 'Chat 2'}
+    // },
+    chatsError: false,
+    chatsSuccess: false,
     message: '',
-    newChatName: ''
+    newChatName: '',
+    lastChatId: ''
 }
 
 export const ChatsReducer = (state = initialState, action) => {
@@ -71,12 +61,14 @@ export const ChatsReducer = (state = initialState, action) => {
             if (action.payload === '') {
                 return state;
             }
-            return {
-                ...state, chats: {
-                    ...state.chats, [nanoid()]: {name: action.payload, messages: []}
-                },
-                newChatName: ''
-            }
+            addNewChat(action.payload);
+            // return {
+            //     ...state, chats: {
+            //         ...state.chats, [nanoid()]: {name: action.payload, messages: []}
+            //     },
+            //     newChatName: ''
+            // }
+            return state;
         case DELETE_CHAT:
             let newChats = {...state.chats};
             delete newChats[action.payload];
@@ -102,6 +94,28 @@ export const ChatsReducer = (state = initialState, action) => {
                     }
                 },
             };
+        case GET_CHATS_START:
+            return {...state, chatsPending: true};
+        case GET_CHATS_SUCCESS:
+            let chats = {};
+            action.payload.forEach((snapshot)=>{
+                chats = { ...chats, [snapshot.key]: snapshot.val()}
+            })
+            return {...state, chatsPending: false, chats: [...Object.entries(chats)]};
+        case GET_CHATS_ERROR:
+            return {...state, chatsPending: false, chatsError: action.payload};
+        case ADD_NEW_CHAT_SUCCESS:
+            let addChats = {};
+            action.payload.forEach((snapshot)=>{
+                addChats = { ...addChats, [snapshot.key]: snapshot.val()}
+            })
+            return {...state, chatsPending: false, chats: [...Object.entries(addChats)]};
+        case ADD_NEW_MESSAGE_TO_CHAT_SUCCESS:
+            let addMessages = {};
+            action.payload.forEach((snapshot)=>{
+                addMessages = { ...addMessages, [snapshot.key]: snapshot.val()}
+            })
+            return {...state, chatsPending: false, chats: [...Object.entries(addMessages)]};
         default:
             return state;
     }

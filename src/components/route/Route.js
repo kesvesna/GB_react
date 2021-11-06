@@ -1,12 +1,15 @@
 import './Route.css';
 import {Route, Redirect} from 'react-router-dom';
 
-export function PrivateRoute({isAuth, to= "/", ...rest}){
+export function PublicRoute({isAuth, to = "/login", ...rest}) {
+    console.log('Public route isAuth =', isAuth, ', redirect to', to);
+    return !isAuth ? <Route {...rest}/> : <Redirect to={to}/>
+}
+
+export function PrivateRoute({isAuth, to = "/", ...rest}) {
+    console.log('Private route isAuth =', isAuth, ', redirect to', to);
     return isAuth ? <Route {...rest}/> : <Redirect to={to}/>
 }
 
-export function PublicRoute({isAuth, to= "/", ...rest}){
-    return !isAuth ? <Route {...rest}/> : <Redirect to={to}/>
-}
 
 

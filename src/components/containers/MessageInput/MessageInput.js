@@ -4,6 +4,7 @@ import SendIcon from "@mui/icons-material/Send";
 import * as React from "react";
 import './MessageInput.css';
 import {handleChangeMessage, handleAddMessageToChat} from "../../../store/chats/actions";
+import {addNewMessageToChat} from "../../../store/chats/thunks";
 import {useSelector} from "react-redux";
 import {store} from "../../../store/create-store";
 import {useParams} from "react-router";
@@ -21,7 +22,7 @@ export function MessageInput() {
             <TextField onChange={(e) => store.dispatch(handleChangeMessage(e.target.value))}
                        fullWidth id="standard-basic" label="Введите сообщение"
                        variant="standard" value={message} autoFocus={true}/>
-            <SendIcon onClick={() => store.dispatch(handleAddMessageToChat(message, id, 'User'))}/>
+            <SendIcon onClick={() => store.dispatch(addNewMessageToChat(message, id, 'User'))}/>
         </Stack>
     )
 }
