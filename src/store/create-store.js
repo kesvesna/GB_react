@@ -12,7 +12,9 @@ import {
     getChatByIdApi,
     getLastChatIdApi,
     addNewChatApi,
-    addNewMessageToChatApi
+    addNewMessageToChatApi,
+    deleteMessageFromChatApi,
+    deleteChatByIdApi
 } from "../api/v1/chats/chats";
 import thunk from "redux-thunk";
 import {SessionReducer} from "./session";
@@ -34,6 +36,8 @@ export const store = createStore(persistreducer, compose(applyMiddleware(crashRe
     getLastChatIdApi,
     addNewChatApi,
     addNewMessageToChatApi,
+    deleteMessageFromChatApi,
+    deleteChatByIdApi
 })), window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()));
 
 export const persistor = persistStore(store);

@@ -8,14 +8,14 @@ import {
     GET_CHATS_SUCCESS,
     GET_CHATS_ERROR,
     GET_CHATS_START,
-    ADD_NEW_CHAT_SUCCESS, ADD_NEW_MESSAGE_TO_CHAT_SUCCESS,
+    ADD_NEW_CHAT_SUCCESS,
+    ADD_NEW_MESSAGE_TO_CHAT_SUCCESS,
+    DELETE_MESSAGE_FROM_CHAT_SUCCESS,
+    DELETE_CHAT_SUCCESS
 } from "./types";
 import {nanoid} from 'nanoid'
 import {format} from 'date-fns'
-import {addNewChat, getAllChatsApi, getLastChatIdApi, addNewChatApi} from "../../api/v1/chats/chats";
-import {useEffect} from "react";
-import {useDispatch} from "react-redux";
-import {getChats} from './thunks';
+import {addNewChat} from "../../api/v1/chats/chats";
 
 const initialState = {
     chats: {},
@@ -112,10 +112,22 @@ export const ChatsReducer = (state = initialState, action) => {
             return {...state, chatsPending: false, chats: [...Object.entries(addChats)]};
         case ADD_NEW_MESSAGE_TO_CHAT_SUCCESS:
             let addMessages = {};
-            action.payload.forEach((snapshot)=>{
+            action.payload.chats.forEach((snapshot)=>{
                 addMessages = { ...addMessages, [snapshot.key]: snapshot.val()}
             })
             return {...state, chatsPending: false, chats: [...Object.entries(addMessages)]};
+        case DELETE_MESSAGE_FROM_CHAT_SUCCESS:
+            let deleteMessages = {};
+            action.payload.chats.forEach((snapshot)=>{
+                deleteMessages = { ...deleteMessages, [snapshot.key]: snapshot.val()}
+            })
+            return {...state, chatsPending: false, chats: [...Object.entries(deleteMessages)]};
+        case DELETE_CHAT_SUCCESS:
+            let deleteChat = {};
+            action.payload.chats.forEach((snapshot)=>{
+                deleteChat = { ...deleteChat, [snapshot.key]: snapshot.val()}
+            })
+            return {...state, chatsPending: false, chats: [...Object.entries(deleteChat)]};
         default:
             return state;
     }

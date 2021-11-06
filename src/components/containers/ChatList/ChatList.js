@@ -7,7 +7,7 @@ import './ChatList.css';
 import {Link} from 'react-router-dom';
 import CloseIcon from '@mui/icons-material/Close';
 import {store} from '../../../store/create-store';
-import {deleteChat} from "../../../store/chats/actions";
+import {deleteChat} from "../../../store/chats/thunks";
 import {useDispatch, useSelector} from "react-redux";
 import {useEffect} from "react";
 import {getChats, chatsSelector} from "../../../store/chats";
@@ -20,8 +20,6 @@ export function ChatList() {
     useEffect(() => {
         dispatch(getChats());
     }, [dispatch])
-
-    console.log('chats before rendering', chats);
 
     return (
         <List>

@@ -14,11 +14,7 @@ import {
     ADD_NEW_MESSAGE_TO_CHAT_ERROR,
     ADD_NEW_MESSAGE_TO_CHAT_START,
     ADD_NEW_MESSAGE_TO_CHAT_SUCCESS,
-    DELETE_CHAT_ERROR,
-    DELETE_CHAT_START,
     DELETE_CHAT_SUCCESS,
-    DELETE_MESSAGE_FROM_CHAT_ERROR,
-    DELETE_MESSAGE_FROM_CHAT_START,
     DELETE_MESSAGE_FROM_CHAT_SUCCESS,
     GET_LAST_CHAT_ID
 } from './types';
@@ -61,9 +57,9 @@ export const getChatsStart = () => ({
 });
 export const getChatsSuccess = (chats) => (
     {
-    type: GET_CHATS_SUCCESS,
-    payload: chats
-});
+        type: GET_CHATS_SUCCESS,
+        payload: chats
+    });
 export const getChatsError = (error) => ({
     type: GET_CHATS_ERROR,
     payload: error
@@ -99,12 +95,20 @@ export const getChatByIdError = (error) => ({
 export const addNewMessageToChatStart = () => ({
     type: ADD_NEW_MESSAGE_TO_CHAT_START
 });
-export const addNewMessageToChatSuccess = (chats) => ({
+export const addNewMessageToChatSuccess = (chats, chatId, author, message) => ({
     type: ADD_NEW_MESSAGE_TO_CHAT_SUCCESS,
-    payload: chats
+    payload: {chats, chatId, author, message}
 });
 export const addNewMessageToChatError = (error) => ({
     type: ADD_NEW_MESSAGE_TO_CHAT_ERROR,
     payload: error
+});
+export const deleteMessageFromChatSuccess = (chats, chatId, messageId) => ({
+    type: DELETE_MESSAGE_FROM_CHAT_SUCCESS,
+    payload: {chats, chatId, messageId}
+});
+export const deleteChatSuccess = (chats, chatId) => ({
+    type: DELETE_MESSAGE_FROM_CHAT_SUCCESS,
+    payload: {chats, chatId}
 });
 

@@ -7,7 +7,8 @@ import {
     getChatByIdSuccess,
     getLastChatId,
     addNewChatSuccess,
-    addNewMessageToChatSuccess
+    addNewMessageToChatSuccess,
+    deleteMessageFromChatSuccess
 } from './actions';
 
 import {getAllChatsApi, getChatByIdApi, getLastChatIdApi, addNewChatApi} from "../../api/v1/chats/chats";
@@ -48,7 +49,21 @@ export const lastChatId = () => async (dispatch, _, api) => {
 }
 
 export const addNewMessageToChat = (message, chatId, author) => async (dispatch, _, api) => {
-    await api.addNewMessageToChatApi(message, chatId, author);
+    if(message !== ''){
+        await api.addNewMessageToChatApi(message, chatId, author);
+    }
     const data = await api.getAllChatsApi();
-    dispatch(addNewMessageToChatSuccess(data));
+    dispatch(addNewMessageToChatSuccess(data, chatId, author, message));
+}
+
+export const deleteMessageFromChat = (chatId, messageId) => async (dispatch, _, api) => {
+    await api.deleteMessageFromChatApi(chatId, messageId);
+    const data = await api.getAllChatsApi();
+    dispatch(deleteMessageFromChatSuccess(data, chatId, messageId));
+}
+
+export const deleteChat = (chatId) => async (dispatch, _, api) => {
+    await api.deleteChatByIdApi(chatId);
+    const data = await api.getAllChatsApi();
+    dispatch(deleteMessageFromChatSuccess(data, chatId));
 }
