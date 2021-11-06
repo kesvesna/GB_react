@@ -1,10 +1,6 @@
 import {
-    HANDLE_ADD_MESSAGE_TO_CHAT,
-    ADD_CHAT,
-    DELETE_CHAT,
     HANDLE_ADD_NEW_CHAT,
     HANDLE_CHANGE_MESSAGE,
-    HANDLE_DELETE_MESSAGE,
     GET_CHATS_SUCCESS,
     GET_CHATS_ERROR,
     GET_CHATS_START,
@@ -13,16 +9,10 @@ import {
     DELETE_MESSAGE_FROM_CHAT_SUCCESS,
     DELETE_CHAT_SUCCESS
 } from "./types";
-import {nanoid} from 'nanoid'
-import {format} from 'date-fns'
-import {addNewChat} from "../../api/v1/chats/chats";
+
 
 const initialState = {
     chats: {},
-    // chats: {
-    //     chat1: { name: 'Chat 1'},
-    //     chat2: {name: 'Chat 2'}
-    // },
     chatsError: false,
     chatsSuccess: false,
     message: '',
@@ -32,48 +22,9 @@ const initialState = {
 
 export const ChatsReducer = (state = initialState, action) => {
     switch (action.type) {
-        case HANDLE_ADD_MESSAGE_TO_CHAT:
-            if (action.payload.message === '') {
-                return {...state, message: ''}
-            }
-            return {
-                ...state, chats: {
-                    ...state.chats,
-                    [action.payload.chatId]: {
-                        ...state.chats[action.payload.chatId],
-                        messages: [
-                            ...state.chats[action.payload.chatId].messages, {
-                                id: nanoid(),
-                                message: action.payload.message,
-                                author: action.payload.author,
-                                date: format(new Date(), 'dd:MM:yyyy HH:mm:ss')
-                            }
-                        ]
-                    }
-                },
-                message: ''
-            };
         case HANDLE_CHANGE_MESSAGE:
             return {
                 ...state, message: action.payload
-            }
-        case ADD_CHAT:
-            if (action.payload === '') {
-                return state;
-            }
-            addNewChat(action.payload);
-            // return {
-            //     ...state, chats: {
-            //         ...state.chats, [nanoid()]: {name: action.payload, messages: []}
-            //     },
-            //     newChatName: ''
-            // }
-            return state;
-        case DELETE_CHAT:
-            let newChats = {...state.chats};
-            delete newChats[action.payload];
-            return {
-                ...state, chats: {...newChats}
             }
         case HANDLE_ADD_NEW_CHAT:
             if (action.payload === '') {
@@ -82,18 +33,6 @@ export const ChatsReducer = (state = initialState, action) => {
             return {
                 ...state, newChatName: action.payload
             }
-        case HANDLE_DELETE_MESSAGE:
-            let chat = {...state.chats[action.payload.chatId]};
-            const newMessages = chat.messages.filter(item => item.id !== action.payload.messageId);
-            return {
-                ...state, chats: {
-                    ...state.chats,
-                    [action.payload.chatId]: {
-                        ...state.chats[action.payload.chatId],
-                        messages: [...newMessages]
-                    }
-                },
-            };
         case GET_CHATS_START:
             return {...state, chatsPending: true};
         case GET_CHATS_SUCCESS:

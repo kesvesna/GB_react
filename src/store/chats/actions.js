@@ -1,9 +1,6 @@
 import {
-    HANDLE_ADD_MESSAGE_TO_CHAT,
-    DELETE_CHAT,
     HANDLE_ADD_NEW_CHAT,
     HANDLE_CHANGE_MESSAGE,
-    HANDLE_DELETE_MESSAGE,
     GET_CHATS_START,
     GET_CHATS_ERROR,
     GET_CHATS_SUCCESS,
@@ -18,34 +15,19 @@ import {
     DELETE_MESSAGE_FROM_CHAT_SUCCESS,
     GET_LAST_CHAT_ID
 } from './types';
-import {GET_GISTS_ERROR, GET_GISTS_START, GET_GISTS_SUCCESS} from "../gists/types";
 
-export const handleAddMessageToChat = (message, chatId, author) => ({
-    type: HANDLE_ADD_MESSAGE_TO_CHAT,
-    payload: {message, chatId, author}
-})
 
 export const handleChangeMessage = (message) => ({
     type: HANDLE_CHANGE_MESSAGE,
     payload: message
 })
 
-export const deleteChat = (chatId) => ({
-    type: DELETE_CHAT,
-    payload: chatId
-})
 
 export const handleAddNewChat = (newChatName) => ({
     type: HANDLE_ADD_NEW_CHAT,
     payload: newChatName
 })
 
-export const handleDeleteMessage = (chatId, messageId) => ({
-    type: HANDLE_DELETE_MESSAGE,
-    payload: {
-        chatId, messageId
-    }
-})
 
 //==========================================
 // Work with firebase

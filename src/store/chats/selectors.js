@@ -1,5 +1,3 @@
-import {useSelector} from "react-redux";
-import {useParams} from "react-router";
 
 export const messageValueSelector = (currentChat) => (state) => {
     return state.chats[currentChat].messages.find(

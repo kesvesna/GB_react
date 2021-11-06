@@ -11,8 +11,6 @@ import {
     deleteMessageFromChatSuccess
 } from './actions';
 
-import {getAllChatsApi, getChatByIdApi, getLastChatIdApi, addNewChatApi} from "../../api/v1/chats/chats";
-
 export const getChats = () => async (dispatch, _, api) => {
     try {
         dispatch(getChatsStart());

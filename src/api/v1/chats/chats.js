@@ -1,5 +1,4 @@
 import {firebaseDb} from '../firebase/firebase';
-import {nanoid} from "nanoid";
 import {format} from 'date-fns'
 
 export const getLastChatIdApi = () => firebaseDb.ref('chats').limitToLast(1).get();
