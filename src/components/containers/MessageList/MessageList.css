@@ -1,0 +1,13 @@
+.bot-message-stack {
+    align-items: flex-start;
+    margin-bottom: 10px;
+}
+
+.user-message-stack {
+    align-items: flex-end;
+    margin-bottom: 10px;
+}
+
+.message-item {
+    width: 50%;
+}
