@@ -2,51 +2,36 @@ import './MessageList.css';
 import Stack from '@mui/material/Stack';
 import * as React from "react";
 import {Item} from '../../presentations/Item/Item';
-import {useSelector} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {useParams} from "react-router";
-import {store} from "../../../store/create-store";
-import {handleDeleteMessage} from "../../../store/chats/actions";
 import CloseIcon from "@mui/icons-material/Close";
+import {chatMessagesSelector, deleteMessageFromChat} from "../../../store/chats";
 
 export function MessageList() {
 
     const {id} = useParams();
 
-    const currentMessages = useSelector((state) =>
-        state.ChatsReducer.chats[id]?.messages ?? []);
+    const currentMessages = useSelector(chatMessagesSelector(id));
+
+    const dispatch = useDispatch();
 
     return (
         <>
-            {currentMessages.map((item) => (
-                (item.author !== "Bot" &&
-                    <Stack key={item.id} className="user-message-stack" display="row">
-                        <Item key={item.id} className="message-item">
-                            <Item>
-                                {item.author + ": "}{item.message}
-                                <CloseIcon style={{float: 'right'}}
-                                           onClick={() => store.dispatch(handleDeleteMessage(id, item.id))}/>
-                            </Item>
-                            <Item style={{textAlign: 'right'}}>
-                                {item.date}
-                            </Item>
+            {currentMessages !== null && currentMessages && currentMessages.map((item) => (
+                <Stack key={item[0]} className={item[1].author !== "Bot" ? "user-message-stack" : "bot-message-stack"}
+                       display="row">
+                    <Item key={item[0]} className="message-item">
+                        <Item>
+                            {item[1].author + ": "}{item[1].message}
+                            <CloseIcon style={{float: 'right'}}
+                                       onClick={() => dispatch(deleteMessageFromChat(id, item[0]))}/>
                         </Item>
-                    </Stack>)
-                ||
-                (item.author === "Bot" &&
-                    <Stack key={item.id} className="bot-message-stack" display="row">
-                        <Item key={item.id} className="message-item">
-                            <Item>
-                                {item.author + ": "}{item.message}{" : " + item.date}
-                                <CloseIcon style={{float: 'right'}}
-                                           onClick={() => store.dispatch(handleDeleteMessage(id, item.id))}/>
-                            </Item>
-                            <Item style={{textAlign: 'right'}}>
-                                {item.date}
-                            </Item>
+                        <Item style={{textAlign: 'right'}}>
+                            {item[1].date}
                         </Item>
-                    </Stack>)
-            ))
-            }
+                    </Item>
+                </Stack>
+            ))}
         </>
     );
 }

@@ -1,11 +1,13 @@
-import {HANDLE_ADD_MESSAGE_TO_CHAT} from '../store/chats/types';
+import {ADD_NEW_MESSAGE_TO_CHAT_SUCCESS} from '../store/chats/types';
 import {handleAddMessageToChat} from "../store/chats/actions";
+import {addNewMessageToChat} from "../store/chats";
+
 
 export const botMessage = (store) => (next) => (action) => {
-    if (action.type === HANDLE_ADD_MESSAGE_TO_CHAT && action.payload.message !== '') {
+    if (action.type === ADD_NEW_MESSAGE_TO_CHAT_SUCCESS && action.payload.message !== '') {
         if (action.payload.author !== "Bot") {
             setTimeout(() => {
-                store.dispatch(handleAddMessageToChat("Message from bot", action.payload.chatId, 'Bot'));
+                store.dispatch(addNewMessageToChat("Message from bot", action.payload.chatId, 'Bot'));
             }, 1000);
         }
     }

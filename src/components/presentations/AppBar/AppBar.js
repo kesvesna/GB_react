@@ -5,9 +5,15 @@ import Link from "@mui/material/Link";
 import AppBar from "@mui/material/AppBar";
 import React from "react";
 import './AppBar.css';
-import {firebaseApp} from "../../../api/v1/firebase/firebase";
+import {firebaseApp, firebaseDb} from "../../../api/v1/firebase/firebase";
+import {getAllChatsApi, deleteAllChatsApi} from "../../../api/v1/chats/chats";
 
 const signOutFromFireBase = () => {
+    getAllChatsApi().then((snapshot) => {
+        //const key = Object.keys(snapshot.val())[1];
+        //deleteAllChatsApi(key);
+        //console.log('key', key);
+    })
     firebaseApp.auth().signOut();
 }
 
