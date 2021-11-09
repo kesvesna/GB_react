@@ -6,7 +6,8 @@ import {
     getGistSuccess,
     getGistByNameError,
     getGistByNameStart,
-    getGistByNameSuccess
+    getGistByNameSuccess,
+    searchGistsByUserNameApi
 } from "../../../store/gists";
 
 describe('get gists thunk', () => {
@@ -39,6 +40,29 @@ describe('get gists thunk', () => {
         expect(dispatch).toHaveBeenNthCalledWith(1, getGistStart());
         expect(dispatch).toHaveBeenNthCalledWith(2, getGistError(ERROR));
 
+    })
+})
+
+describe("search gists thunk", () => {
+    it("search gists success", async () => {
+        const SEARCH = "test"
+        const isCurrentQuery = true
+
+        const dispatch = jest.fn()
+        const searchGistsByUserNameApi = jest
+            .fn()
+            .mockResolvedValue({ data: SEARCH })
+
+        const thunk = getGistsByName(SEARCH, isCurrentQuery)
+
+        await thunk(dispatch, null, { searchGistsByUserNameApi })
+
+        expect(searchGistsByUserNameApi).toBeCalledTimes(1)
+        expect(searchGistsByUserNameApi).toBeCalledWith(SEARCH)
+
+        expect(dispatch).toBeCalledTimes(2)
+        expect(dispatch).toHaveBeenNthCalledWith(1,  getGistByNameStart())
+        expect(dispatch).toHaveBeenNthCalledWith(2, getGistByNameSuccess(SEARCH))
     })
 })
 
