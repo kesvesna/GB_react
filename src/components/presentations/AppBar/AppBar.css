@@ -1,0 +1,8 @@
+.app-bar-list {
+    display: flex;
+}
+
+.app-bar-link {
+    color: white !important;
+}
+
