@@ -1,0 +1,13 @@
+.right-panel-current-chat-item {
+    align-items: center;
+    height: 10vh;
+}
+
+.right-panel-message-list-item {
+    height: 58vh;
+    overflow-x: auto
+}
+
+.message-input-item {
+    height: 10vh;
+}
